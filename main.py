@@ -24,13 +24,13 @@ def kor(string):
     f_logfile.write(string + '\n')
 
     string = string.split('-')
-    print(int(string[0]), '-',  int(string[1]))
-    for line in line_list[int(string[0]) + 2: int(string[1]) + 2]: #  line[0] - tittle //Fbwo
-        if float(line.split('\t')[1]) > 1:  # AVER.HW > 1
-            f_kor.write(line)
-        else:
-            print(line.split('\t')[8] + ' - kor_WARNING: AVER.HW < 1')
-            f_logfile.write(line.split('\t')[8] + ' - kor_WARNING: AVER.HW < 1' + '\n')
+    for line in line_list[1:]:
+        if int(string[0]) <= int(line.split('\t')[8]) <= int(string[1]):  # value1 <= File# <= value1
+            if float(line.split('\t')[1]) > 1:  # AVER.HW > 1
+                f_kor.write(line)
+            else:
+                print(line.split('\t')[8] + ' - kor_WARNING: AVER.HW < 1')
+                f_logfile.write(line.split('\t')[8] + ' - kor_WARNING: AVER.HW < 1' + '\n')
     return
 
 
@@ -42,12 +42,13 @@ def dln(string):
     f_logfile.write('\t' + string + '\n')
 
     string = string.split('-')
-    for line in line_list[int(string[0]) + 1: int(string[1]) + 1]:
-        if float(line.split('\t')[1]) > 1:  # AVER.HW > 1
-            f_dln.write(line)
-        else:
-            print(line.split('\t')[8] + ' - dln_WARNING: AVER.HW < 1')
-            f_logfile.write(line.split('\t')[8] + ' - dln_WARNING: AVER.HW < 1' + '\n')
+    for line in line_list[1:]:
+        if int(string[0]) <= int(line.split('\t')[8]) <= int(string[1]):  # value1 <= File# <= value1
+            if float(line.split('\t')[1]) > 1:  # AVER.HW > 1
+                f_dln.write(line)
+            else:
+                print(line.split('\t')[8] + ' - dln_WARNING: AVER.HW < 1')
+                f_logfile.write(line.split('\t')[8] + ' - dln_WARNING: AVER.HW < 1' + '\n')
     return 0
 
 
@@ -147,8 +148,7 @@ if __name__ == '__main__':
 
     dln('1701-1728')  # 1729???
 
-    # hardcode: '1730-1762' = 1730 -1 - 1762 - 1'
-    kor('1730-1762') # 1763 warning
+    kor('1730-1762')
 
     dln('1763-1791')
 
